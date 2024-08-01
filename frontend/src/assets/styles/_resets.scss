@@ -1,0 +1,55 @@
+@import "./settings";
+
+:root {
+    font-family: sans-serif;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    font: inherit;
+}
+
+a {
+
+    &:hover {}
+
+    &.active {}
+}
+
+h1 {
+    font-family: "Roboto Serif", sans-serif;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    color: snow;
+    font-weight: bold;
+    font-family: sans-serif;
+    border-radius: 10px;
+}
+
+button.red-btn {
+    background: $red;
+}
+
+button.purple-btn {
+    background: $purple;
+}
+
+button.green-btn {
+    background: $green;
+}
