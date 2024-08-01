@@ -1,2 +1,9 @@
 @use './assets/styles/resets';
 @import './assets/styles/settings';
+
+
+button,
+input {
+    border: none;
+    outline: none;
+}
