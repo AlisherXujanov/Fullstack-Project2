@@ -37,16 +37,11 @@ class Products(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+
     def delete(self, *args, **kwargs):
         # DELETE ACTUAL FILE
         self.delete_image()
         super().delete(*args, **kwargs)
-
-    # def update(self, *args, **kwargs):
-    #     # DELETE ACTUAL FILE
-    #     self.delete_image()
-    #     super().update(*args, **kwargs)
-
 
 
     class Meta:

@@ -9,6 +9,7 @@ django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 djangorestframework = "*"
 pillow = "*"
+django-cleanup = "*"
 
 [dev-packages]
 
