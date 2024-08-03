@@ -1,12 +1,8 @@
-import json
 from django.db import models
 from PIL import Image
 import os
-import sys
 
 # Clone of AliExpress products
-
-
 class Products(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -18,6 +14,17 @@ class Products(models.Model):
 
     def __str__(self):
         return self.name
+
+    def delete_image(self):
+        # DELETE ACTUAL FILE
+        image_name = self.image.name.split('/')[-1]
+        if "default.jpg" not in image_name:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+            else:
+                print("Error: %s file not found" % self.image.path)
+        self.image = 'products/default.jpg'
+        self.save()
 
     def save(self, *args, **kwargs):
         if self.price < 0:
@@ -32,13 +39,15 @@ class Products(models.Model):
 
     def delete(self, *args, **kwargs):
         # DELETE ACTUAL FILE
-        image_name = self.image.name.split('/')[-1]
-        if "default.jpg" not in image_name:
-            if os.path.isfile(self.image.path):
-                os.remove(self.image.path)
-            else:
-                print("Error: %s file not found" % self.image.path)
+        self.delete_image()
         super().delete(*args, **kwargs)
+
+    # def update(self, *args, **kwargs):
+    #     # DELETE ACTUAL FILE
+    #     self.delete_image()
+    #     super().update(*args, **kwargs)
+
+
 
     class Meta:
         ordering = ['-created_at']
