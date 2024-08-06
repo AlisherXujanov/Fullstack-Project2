@@ -92,8 +92,10 @@ header {
             border-radius: 5px;
             margin: 0 3px;
             font-size: 0.8em;
+            cursor: pointer;
 
             &.active {
+                cursor: default;
                 border: none;
                 background-color: $color-icon-bg-icon-darker;
             }

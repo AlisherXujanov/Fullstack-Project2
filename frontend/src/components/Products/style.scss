@@ -1,0 +1,80 @@
+@import '../../assets/styles/settings';
+
+.products-wrapper {
+    max-width: 1374px;
+    margin: 30px auto;
+
+    .header {
+        margin-bottom: 20px;
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 0;
+            margin-right: 20px;
+            font-weight: bold;
+            color: $color-grey-dark-text;
+
+            &.active {
+                color: black;
+                border-bottom: 1px solid black;
+            }
+        }
+    }
+
+    .content {
+        @include flex($justify: flex-start);
+        flex-wrap: wrap;
+
+        .product {
+            width: 220px;
+            margin: 10px 0;
+
+            .price {
+                margin-bottom: 10px;
+
+                .discount {
+                    display: inline-block;
+                    font-size: 0.7em;
+                    margin-bottom: 5px;
+
+                    .actual-price {
+                        color: $color-text-contrast-disabled;
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            .row {
+                @include flex(row, flex-start, flex-start, $gap: 6px);
+
+                .stars {
+                    height: 20px;
+                    background-color: $color-fills-fill-promo;
+                    color: $color-text-sales-primary;
+                    padding: 3px 5px;
+                    border-radius: 5px;
+                    font-size: 0.8em;
+                    @include flex($gap: 5px);
+                }
+
+                .sold-title {
+                    height: 20px;
+                    border-radius: 3px;
+                    color: $color-text-contrast-inverse;
+                    background-color: $color-icon-bg-icon-darker;
+                    display: inline-block;
+                    font-size: 0.8em;
+                    padding: 4px;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .name,
+            .description {
+                font-size: 0.8em;
+                color: $color-text-contrast-inverse;
+            }
+        }
+    }
+}
