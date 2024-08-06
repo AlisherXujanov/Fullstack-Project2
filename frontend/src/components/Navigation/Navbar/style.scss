@@ -69,4 +69,34 @@ header {
 
         }
     }
+
+    .nav-bottom {
+        margin: 6px 0;
+        overflow: hidden;
+
+        .flash-deals {
+            float: left;
+        }
+
+        .location,
+        .lang,
+        .currency {
+            float: right;
+        }
+
+        div {
+            height: 32px;
+            @include flex(row, center, center, 0);
+            padding: 5px 10px;
+            border: 1px solid $color-borders-normal-with-bg;
+            border-radius: 5px;
+            margin: 0 3px;
+            font-size: 0.8em;
+
+            &.active {
+                border: none;
+                background-color: $color-icon-bg-icon-darker;
+            }
+        }
+    }
 }
