@@ -1,0 +1,161 @@
+@import "../../assets/styles/settings";
+
+.auth-login-wrapper {
+    @include flex(row, flex-start, center);
+    max-width: 1374px;
+    margin: 50px auto;
+
+    .open-modal {
+        display: block;
+        padding: 10px 20px;
+        background-color: $color-light-green;
+        color: snow;
+
+        &:hover {
+            background-color: $color-light-green-blue;
+        }
+    }
+
+
+    .modal {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        @include flex(row, center, center);
+        display: none;
+        background-color: rgb(0, 0, 0, 0.5);
+
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .text-muted {
+            color: darkgray;
+            text-align: center;
+        }
+
+        .modal-content {
+            border-radius: 30px;
+            background-color: $color-white;
+            width: 450px;
+            padding: 10px 20px;
+
+            .close-modal {
+                display: block;
+                height: 50px;
+                text-align: right;
+                font-size: 3em;
+                font-family: serif;
+                font-weight: 100;
+                cursor: pointer;
+            }
+
+            button,
+            input {
+                width: 100%;
+                display: block;
+                border-radius: 50px;
+                padding: 10px 20px;
+                background-color: $color-icon-bg-icon-darker;
+                border: none;
+                height: 56px;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+
+            label {
+                display: block;
+                margin-left: 10px;
+            }
+
+            input {
+                background-color: $color-fills-fill-white;
+                border: $color-borders-normal 2px solid;
+
+                &:hover {
+                    border-color: $color-borders-hover;
+                }
+
+                &:focus {
+                    border-color: $color-borders-active;
+                }
+            }
+
+            ::placeholder {
+                font-family: sans-serif;
+                font-size: small;
+                color: darkgray;
+            }
+
+
+            form {
+                .form-control {
+                    margin-bottom: 20px;
+
+                    * {
+                        margin-bottom: 5px;
+                    }
+
+                    button.submit {
+                        color: $color-white;
+                        background-color: $color-controls-bg-navbar-button;
+
+                        &:hover {
+                            background-color: $color-controls-bg-navbar-button-hover;
+                        }
+                    }
+                }
+            }
+
+            button.create-account {
+                background-color: $color-grey-average;
+                color: black;
+                margin: 20px 0 10px 0;
+
+                &:hover {
+                    background-color: $color-fills-fill-blue-gray;
+                }
+            }
+
+            .help {
+                text-align: center;
+                padding: 10px;
+                margin-bottom: 20px;
+
+                a {
+                    font-family: sans-serif;
+                    color: $color-dark-text;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+
+            .social-media-auth {
+                .social-icons {
+                    margin: 20px 0 40px 0;
+                    @include flex(row, center, center);
+
+                    a {
+                        display: inline-block;
+                        width: 50px;
+                        height: 50px;
+                        background-color: rgb(0, 0, 0, 0.1);
+                        padding: 3px;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                        @include flex(row, center, center);
+
+                        svg {
+                            width: 25px;
+                            height: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
