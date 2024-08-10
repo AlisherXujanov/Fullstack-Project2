@@ -10,6 +10,7 @@ djangorestframework-simplejwt = "*"
 djangorestframework = "*"
 pillow = "*"
 django-cleanup = "*"
+djoser = "*"
 
 [dev-packages]
 

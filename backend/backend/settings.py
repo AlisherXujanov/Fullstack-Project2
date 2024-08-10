@@ -44,8 +44,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'main',
+    'djoser',
     
+    'main',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -158,4 +159,10 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
     # In the client we need to send the token in the header like this:
     # Authorization: bearer <token>
+}
+
+DJOSER = {
+    "USER_ID_FIELD": "username",  # We use username for login
+    "LOGIN_FIELD": "email", # We can use email or username for login
+    "USER_CREATE_PASSWORD_RETYPE": True, # We can use this to make user retype the password
 }
