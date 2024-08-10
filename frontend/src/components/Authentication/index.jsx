@@ -19,8 +19,9 @@ function Authentication(props) {
         username: "",
         email: "",
         password: "",
-        password2: ""
+        re_password: ""
     })
+    const [errors, setErrors] = useState({})
 
     function setInput(e) {
         const { name, value } = e.target
@@ -42,7 +43,7 @@ function Authentication(props) {
             path = "/api/token/create/"
         } else {
             form = registrationForm
-            path = "/api/users/"
+            path = "/auth/users/"
         }
 
         const options = {
@@ -50,18 +51,37 @@ function Authentication(props) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(loginForm)
+            body: JSON.stringify(form)
         }
         let response = await fetch(BASE_URL + path, options)
-        let data = await response.json()
-        console.log(data)
 
-        if (hasAccount) {
-            localStorage.setItem("auth-token", JSON.stringify(data))
+        if (response.ok) {
+            let data = await response.json()
+            console.log(data)
+
+            if (hasAccount) {
+                localStorage.setItem("auth-token", JSON.stringify(data))
+                alert("Logged in successfully")
+                setShowModal(false)
+            } else {
+                setHasAccount(true)
+                alert("Account created successfully. Login now!")
+            }
+            e.target.reset()
         } else {
-            setHasAccount(true)
+            let errors = await response.json()
+            setLoginForm({})
+            setRegistrationForm({})
+            console.log(errors)
+            setErrors(errors)
         }
-        e.target.reset()
+    }
+
+    function changeWindow(e) {
+        setErrors({})
+        setLoginForm({})
+        setRegistrationForm({})
+        setHasAccount(!hasAccount)
     }
 
     return (
@@ -76,6 +96,18 @@ function Authentication(props) {
 
                     <h1>{hasAccount ? "Sign in" : "Create account"}</h1>
 
+                    <ul className="errors">
+                        {
+                            Object.entries(errors).map(([key, value], index) => {
+                                return (
+                                    <li className="error" key={index}>
+                                        {value}
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+
                     <div className="info">
                         {
                             hasAccount
@@ -88,6 +120,7 @@ function Authentication(props) {
                                             onChange={setInput}
                                             placeholder="Username"
                                             name="username"
+                                            value={loginForm.username || ""}
                                         />
                                     </div>
                                     <div className="form-control login-password">
@@ -97,6 +130,7 @@ function Authentication(props) {
                                             onChange={setInput}
                                             placeholder="Password"
                                             name="password"
+                                            value={loginForm.password || ""}
                                         />
                                     </div>
                                     <div className="form-control">
@@ -112,6 +146,7 @@ function Authentication(props) {
                                             onChange={setInput}
                                             placeholder="Username"
                                             name="username"
+                                            value={registrationForm.username || ""}
                                         />
                                     </div>
                                     <div className="form-control reg-email">
@@ -121,6 +156,7 @@ function Authentication(props) {
                                             onChange={setInput}
                                             placeholder="Email"
                                             name="email"
+                                            value={registrationForm.email || ""}
                                         />
                                     </div>
                                     <div className="form-control reg-password">
@@ -130,6 +166,7 @@ function Authentication(props) {
                                             onChange={setInput}
                                             placeholder="Password"
                                             name="password"
+                                            value={registrationForm.password || ""}
                                         />
                                     </div>
                                     <div className="form-control reg-password-conf">
@@ -138,7 +175,8 @@ function Authentication(props) {
                                             type="password"
                                             onChange={setInput}
                                             placeholder="Password confirmation"
-                                            name="password2"
+                                            name="re_password"
+                                            value={registrationForm.re_password || ""}
                                         />
                                     </div>
                                     <div className="form-control">
@@ -168,7 +206,7 @@ function Authentication(props) {
                         <hr />
 
                         <button className="create-account" type="button"
-                            onClick={(e) => { setHasAccount(!hasAccount) }}
+                            onClick={changeWindow}
                         >
                             {hasAccount ? "Create an account" : "Already have an account"}
                         </button>
