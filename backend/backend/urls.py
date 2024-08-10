@@ -23,7 +23,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView
 )
-
+from .views import *
 
 
 urlpatterns = [
@@ -41,5 +41,7 @@ urlpatterns = [
     # DJOSER
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
+
+    path('auth/logout/', LogoutView.as_view(), name='auth_logout'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
