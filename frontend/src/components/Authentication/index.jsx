@@ -62,7 +62,7 @@ function Authentication(props) {
             if (hasAccount) {
                 localStorage.setItem("auth-token", JSON.stringify(data))
                 alert("Logged in successfully")
-                setShowModal(false)
+                closeModal()
             } else {
                 setHasAccount(true)
                 alert("Account created successfully. Login now!")
@@ -84,6 +84,15 @@ function Authentication(props) {
         setHasAccount(!hasAccount)
     }
 
+    function closeModal(e=null) {
+        if (e.target.classList.contains("modal")) {
+            setShowModal(false)
+            setErrors({})
+            setLoginForm({})
+            setRegistrationForm({})
+        }
+    }
+
     return (
         <div className="auth-login-wrapper">
             <button className="open-modal" onClick={() => setShowModal(true)}>
@@ -92,7 +101,7 @@ function Authentication(props) {
 
             <div className="modal" style={showModal ? { display: 'flex' } : { display: 'none' }}>
                 <div className="modal-content">
-                    <span className="close-modal" onClick={() => setShowModal(false)}>&times;</span>
+                    <span className="close-modal" onClick={closeModal}>&times;</span>
 
                     <h1>{hasAccount ? "Sign in" : "Create account"}</h1>
 
