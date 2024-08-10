@@ -1,49 +1,40 @@
-import { useEffect, useState } from "react"
-import "./style.scss"
-import { FcGoogle } from "react-icons/fc"
-import { SlSocialVkontakte } from "react-icons/sl"
-import { SiOdnoklassniki } from "react-icons/si"
-import { MdAlternateEmail } from "react-icons/md"
-
-
+import { useEffect, useState } from "react";
+import "./style.scss";
+import { FcGoogle } from "react-icons/fc";
+import { SlSocialVkontakte } from "react-icons/sl";
+import { SiOdnoklassniki } from "react-icons/si";
+import { MdAlternateEmail } from "react-icons/md";
 
 function Authentication(props) {
-    const [showModal, setShowModal] = useState(false)
-    const [hasAccount, setHasAccount] = useState(false)
-
-    const [loginForm, setLoginForm] = useState({
-        email: "",
-        password: ""
-    })
-    const [registrationForm, setRegistrationForm] = useState({
+    const [showModal, setShowModal] = useState(false);
+    const [hasAccount, setHasAccount] = useState(false);
+    const [form, setForm] = useState({
         username: "",
         email: "",
         password: "",
         re_password: ""
-    })
-    const [errors, setErrors] = useState({})
+    });
+    const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        setErrors({});
+        setForm({});
+    }, [hasAccount]);
 
     function setInput(e) {
-        const { name, value } = e.target
-
-        if (hasAccount) {
-            setLoginForm({ ...loginForm, [name]: value })
-        } else {
-            setRegistrationForm({ ...registrationForm, [name]: value })
-        }
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: value });
     }
 
     async function submit(e) {
-        e.preventDefault()
-        const BASE_URL = "http://127.0.0.1:8000"
-        let form = null
-        let path = null
+        e.preventDefault();
+        const BASE_URL = "http://127.0.0.1:8000";
+        let path = null;
+
         if (hasAccount) {
-            form = loginForm
-            path = "/api/token/create/"
+            path = "/api/token/create/";
         } else {
-            form = registrationForm
-            path = "/auth/users/"
+            path = "/auth/users/";
         }
 
         const options = {
@@ -52,45 +43,41 @@ function Authentication(props) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(form)
-        }
-        let response = await fetch(BASE_URL + path, options)
+        };
+
+        let response = await fetch(BASE_URL + path, options);
 
         if (response.ok) {
-            let data = await response.json()
-            console.log(data)
+            let data = await response.json();
+            console.log(data);
 
             if (hasAccount) {
-                localStorage.setItem("auth-token", JSON.stringify(data))
-                alert("Logged in successfully")
-                closeModal()
+                localStorage.setItem("auth-token", JSON.stringify(data));
+                alert("Logged in successfully");
+                closeModal();
             } else {
-                setHasAccount(true)
-                alert("Account created successfully. Login now!")
+                setHasAccount(true);
+                alert("Account created successfully. Login now!");
             }
-            e.target.reset()
+            e.target.reset();
         } else {
-            let errors = await response.json()
-            setLoginForm({})
-            setRegistrationForm({})
-            console.log(errors)
-            setErrors(errors)
+            let errors = await response.json();
+            setForm({});
+            console.log(errors);
+            setErrors(errors);
         }
     }
 
     function changeWindow(e) {
-        setErrors({})
-        setLoginForm({})
-        setRegistrationForm({})
-        setHasAccount(!hasAccount)
+        setErrors({});
+        setForm({});
+        setHasAccount(!hasAccount);
     }
 
-    function closeModal(e=null) {
-        if (e.target.classList.contains("modal")) {
-            setShowModal(false)
-            setErrors({})
-            setLoginForm({})
-            setRegistrationForm({})
-        }
+    function closeModal(e = null) {
+        setShowModal(false);
+        setErrors({});
+        setForm({});
     }
 
     return (
@@ -99,103 +86,85 @@ function Authentication(props) {
                 Open modal
             </button>
 
-            <div className="modal" style={showModal ? { display: 'flex' } : { display: 'none' }}>
+            <div className="modal" style={showModal ? { display: "flex" } : { display: "none" }}>
                 <div className="modal-content">
-                    <span className="close-modal" onClick={closeModal}>&times;</span>
+                    <span className="close-modal" onClick={closeModal}>
+                        &times;
+                    </span>
 
                     <h1>{hasAccount ? "Sign in" : "Create account"}</h1>
 
                     <ul className="errors">
-                        {
-                            Object.entries(errors).map(([key, value], index) => {
-                                return (
-                                    <li className="error" key={index}>
-                                        {value}
-                                    </li>
-                                )
-                            })
-                        }
+                        {Object.entries(errors).map(([key, value], index) => (
+                            <li className="error" key={index}>
+                                {value}
+                            </li>
+                        ))}
                     </ul>
 
                     <div className="info">
-                        {
-                            hasAccount
-                                ?
-                                <form onSubmit={submit}>
-                                    <div className="form-control login-name">
-                                        <label htmlFor="login-name">Username</label>
-                                        <input id="login-name"
-                                            type="text"
-                                            onChange={setInput}
-                                            placeholder="Username"
-                                            name="username"
-                                            value={loginForm.username || ""}
-                                        />
-                                    </div>
-                                    <div className="form-control login-password">
-                                        <label htmlFor="login-password">Password</label>
-                                        <input id="login-password"
-                                            type="password"
-                                            onChange={setInput}
-                                            placeholder="Password"
-                                            name="password"
-                                            value={loginForm.password || ""}
-                                        />
-                                    </div>
-                                    <div className="form-control">
-                                        <button className="submit" type="submit">Continue</button>
-                                    </div>
-                                </form>
-                                :
-                                <form onSubmit={submit}>
-                                    <div className="form-control reg-name">
-                                        <label htmlFor="reg-name">Username</label>
-                                        <input id="reg-name"
-                                            type="text"
-                                            onChange={setInput}
-                                            placeholder="Username"
-                                            name="username"
-                                            value={registrationForm.username || ""}
-                                        />
-                                    </div>
-                                    <div className="form-control reg-email">
-                                        <label htmlFor="reg-email">Email</label>
-                                        <input id="reg-email"
-                                            type="email"
-                                            onChange={setInput}
-                                            placeholder="Email"
-                                            name="email"
-                                            value={registrationForm.email || ""}
-                                        />
-                                    </div>
-                                    <div className="form-control reg-password">
-                                        <label htmlFor="reg-password">Password</label>
-                                        <input id="reg-password"
-                                            type="password"
-                                            onChange={setInput}
-                                            placeholder="Password"
-                                            name="password"
-                                            value={registrationForm.password || ""}
-                                        />
-                                    </div>
-                                    <div className="form-control reg-password-conf">
-                                        <label htmlFor="reg-password-conf">Password confirmation</label>
-                                        <input id="reg-password-conf"
-                                            type="password"
-                                            onChange={setInput}
-                                            placeholder="Password confirmation"
-                                            name="re_password"
-                                            value={registrationForm.re_password || ""}
-                                        />
-                                    </div>
-                                    <div className="form-control">
-                                        <button className="submit" type="submit">Continue</button>
-                                    </div>
-                                </form>
-                        }
+                        <form onSubmit={submit}>
+                            {!hasAccount && (
+                                <div className="form-control reg-email">
+                                    <label htmlFor="reg-email">Email</label>
+                                    <input
+                                        id="reg-email"
+                                        type="email"
+                                        onChange={setInput}
+                                        placeholder="Email"
+                                        name="email"
+                                        value={form.email || ""}
+                                    />
+                                </div>
+                            )}
+                            <div className="form-control reg-name">
+                                <label htmlFor="reg-name">Username</label>
+                                <input
+                                    id="reg-name"
+                                    type="text"
+                                    onChange={setInput}
+                                    placeholder="Username"
+                                    name="username"
+                                    value={form.username || ""}
+                                />
+                            </div>
+
+
+                            <div className="form-control reg-password">
+                                <label htmlFor="reg-password">Password</label>
+                                <input
+                                    id="reg-password"
+                                    type="password"
+                                    onChange={setInput}
+                                    placeholder="Password"
+                                    name="password"
+                                    value={form.password || ""}
+                                />
+                            </div>
+
+                            {!hasAccount && (
+                                <div className="form-control reg-password-conf">
+                                    <label htmlFor="reg-password-conf">Password confirmation</label>
+                                    <input
+                                        id="reg-password-conf"
+                                        type="password"
+                                        onChange={setInput}
+                                        placeholder="Password confirmation"
+                                        name="re_password"
+                                        value={form.re_password || ""}
+                                    />
+                                </div>
+                            )}
+
+                            <div className="form-control">
+                                <button className="submit" type="submit">
+                                    Continue
+                                </button>
+                            </div>
+                        </form>
 
                         <div className="social-media-auth">
-                            <p className="text-muted">Or conrinue through</p>
+                            <p className="text-muted">Or continue through</p>
                             <div className="social-icons">
                                 <a href="#" className="vkontakte-link-wrapper">
                                     <SlSocialVkontakte />
@@ -214,9 +183,7 @@ function Authentication(props) {
 
                         <hr />
 
-                        <button className="create-account" type="button"
-                            onClick={changeWindow}
-                        >
+                        <button className="create-account" type="button" onClick={changeWindow}>
                             {hasAccount ? "Create an account" : "Already have an account"}
                         </button>
                         <p className="help">
@@ -225,12 +192,10 @@ function Authentication(props) {
 
                         <p className="text-muted">
                             <small>
-                                By using this site, you automatically create or use an existing account on AliExpress,
-                                agree to the processing of personal data and accept the terms <u>AliExpress User Agreement</u>.
-                                <u>Show More</u>
+                                By using this site, you automatically create or use an existing account on AliExpress, agree to the
+                                processing of personal data and accept the terms <u>AliExpress User Agreement</u>. <u>Show More</u>
                             </small>
                         </p>
-
                     </div>
                 </div>
             </div>
