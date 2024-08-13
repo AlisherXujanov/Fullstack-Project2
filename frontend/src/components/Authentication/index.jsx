@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import { useEffect, useState, useContext } from "react"
 import { FcGoogle } from "react-icons/fc"
 import { SlSocialVkontakte } from "react-icons/sl"
@@ -5,7 +6,6 @@ import { SiOdnoklassniki } from "react-icons/si"
 import { MdAlternateEmail } from "react-icons/md"
 import { BASE_URL, context } from "../../store"
 import "./style.scss"
-
 
 
 function Authentication(props) {
@@ -70,11 +70,11 @@ function Authentication(props) {
                 console.log(user_data)
                 console.log(state.currentUser)
                 
-                alert("Logged in successfully")
+                toast.success("Logged in successfully", { theme: "dark" })
                 closeModal();
             } else {
                 setHasAccount(true);
-                alert("Account created successfully. Login now!");
+                toast.success("Account created successfully. Login now!", { theme: "dark" })
             }
             e.target.reset();
         } else {
