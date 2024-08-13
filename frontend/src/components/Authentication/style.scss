@@ -40,6 +40,20 @@
         .modal-content {
             overflow: auto;
             max-height: 95vh;
+            border-radius: 30px;
+            background-color: $color-white;
+            width: 450px;
+            padding: 10px 20px;
+
+            .errors {
+                padding: 20px;
+                margin: 20px 0;
+
+                .error {
+                    color: red;
+                    margin-bottom: 10px;
+                }
+            }
 
             &::-webkit-scrollbar {
                 width: 10px;
@@ -52,22 +66,6 @@
                 border-radius: 10px;
                 background-color: $color-fills-fill-alert;
             }
-
-            .errors {
-                padding: 20px;
-                margin: 20px 0;
-
-                .error {
-                    color: red;
-                    margin-bottom: 10px;
-                }
-            }
-
-
-            border-radius: 30px;
-            background-color: $color-white;
-            width: 450px;
-            padding: 10px 20px;
 
             .close-modal {
                 display: block;
