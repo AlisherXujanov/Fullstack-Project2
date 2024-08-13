@@ -1,11 +1,17 @@
 import './style.scss'
 import { Link } from 'react-router-dom'
 import { context } from '../../../store'
+import { logoutFunction } from '../../../store/apiCalls'
 import { useContext } from 'react'
+import { toast } from 'react-toastify'
 
 function Navbar() {
     const state = useContext(context)
 
+    function logout() {
+        logoutFunction()
+        toast.success('Logged out successfully', { theme: "dark" })
+    }
 
     return (
         <header>
@@ -37,7 +43,17 @@ function Navbar() {
 
                 {
                     state.currentUser?.username ?
-                        <h3>{state.currentUser.username}</h3>
+                        <div className="dropdown">
+                            <button className="dropbtn nav-box">
+                                <h3>{state.currentUser.username}</h3>
+
+                                <div className="drp-content">
+                                    <Link to='#'>Profile</Link>
+                                    <a href='#' onClick={logout}>Logout</a>
+                                </div>
+                            </button>
+                        </div>
+
                         :
                         <Link to='/auth'>
                             <div className="auth-wrapper nav-box">

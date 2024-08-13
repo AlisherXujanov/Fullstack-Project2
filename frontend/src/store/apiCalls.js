@@ -24,14 +24,16 @@ function refreshToken() {
 
 function logoutFunction() {
     const TOKEN = localStorage.getItem("auth-token") || "{}"
+    const accessToken = JSON.parse(TOKEN).access
+    const refreshToken = JSON.parse(TOKEN).refresh
 
     fetch(BASE_URL + "/auth/logout/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${JSON.parse(TOKEN).access}`
+            "Authorization": `Bearer ${accessToken}`
         },
-        body: JSON.stringify({ refresh: JSON.parse(TOKEN).refresh })
+        body: JSON.stringify({ refresh: refreshToken })
     })
         .then(response => response.json())
         .then(data => {
