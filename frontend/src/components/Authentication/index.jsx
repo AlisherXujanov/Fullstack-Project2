@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
-import "./style.scss";
-import { FcGoogle } from "react-icons/fc";
-import { SlSocialVkontakte } from "react-icons/sl";
-import { SiOdnoklassniki } from "react-icons/si";
-import { MdAlternateEmail } from "react-icons/md";
+import { useEffect, useState } from "react"
+import "./style.scss"
+import { FcGoogle } from "react-icons/fc"
+import { SlSocialVkontakte } from "react-icons/sl"
+import { SiOdnoklassniki } from "react-icons/si"
+import { MdAlternateEmail } from "react-icons/md"
+import { BASE_URL } from "../../store"
 
 function Authentication(props) {
-    const [showModal, setShowModal] = useState(false);
-    const [hasAccount, setHasAccount] = useState(false);
+    const [showModal, setShowModal] = useState(false)
+    const [hasAccount, setHasAccount] = useState(true)
     const [form, setForm] = useState({
         username: "",
         email: "",
         password: "",
         re_password: ""
-    });
-    const [errors, setErrors] = useState({});
+    })
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
         setErrors({});
@@ -23,18 +24,17 @@ function Authentication(props) {
 
     function setInput(e) {
         const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
+        setForm({ ...form, [name]: value })
     }
 
     async function submit(e) {
-        e.preventDefault();
-        const BASE_URL = "http://127.0.0.1:8000";
-        let path = null;
+        e.preventDefault()
+        let path = null
 
         if (hasAccount) {
-            path = "/api/token/create/";
+            path = "/api/token/create/"
         } else {
-            path = "/auth/users/";
+            path = "/auth/users/"
         }
 
         const options = {
@@ -45,15 +45,15 @@ function Authentication(props) {
             body: JSON.stringify(form)
         };
 
-        let response = await fetch(BASE_URL + path, options);
+        let response = await fetch(BASE_URL + path, options)
 
         if (response.ok) {
-            let data = await response.json();
-            console.log(data);
+            let data = await response.json()
+            console.log(data)
 
             if (hasAccount) {
-                localStorage.setItem("auth-token", JSON.stringify(data));
-                alert("Logged in successfully");
+                localStorage.setItem("auth-token", JSON.stringify(data))
+                alert("Logged in successfully")
                 closeModal();
             } else {
                 setHasAccount(true);
