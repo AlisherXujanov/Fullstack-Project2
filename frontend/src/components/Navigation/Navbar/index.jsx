@@ -1,7 +1,7 @@
 import './style.scss'
 import { Link } from 'react-router-dom'
 import { context } from '../../../store'
-import { logoutFunction } from '../../../store/apiCalls'
+import { fetchLogout } from '../../../store/apiCalls'
 import { useContext } from 'react'
 import { toast } from 'react-toastify'
 
@@ -9,7 +9,8 @@ function Navbar() {
     const state = useContext(context)
 
     function logout() {
-        logoutFunction()
+        fetchLogout()
+        state.dispatch({ type: 'LOGOUT' })
         toast.success('Logged out successfully', { theme: "dark" })
     }
 
