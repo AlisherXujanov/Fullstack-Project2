@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
-import "./style.scss"
+import { useEffect, useState, useContext } from "react"
 import { FcGoogle } from "react-icons/fc"
 import { SlSocialVkontakte } from "react-icons/sl"
 import { SiOdnoklassniki } from "react-icons/si"
 import { MdAlternateEmail } from "react-icons/md"
-import { BASE_URL } from "../../store"
+import { BASE_URL, context } from "../../store"
+import "./style.scss"
+
+
 
 function Authentication(props) {
+    const state = useContext(context)
+
     const [showModal, setShowModal] = useState(false)
     const [hasAccount, setHasAccount] = useState(true)
     const [form, setForm] = useState({
@@ -53,6 +57,19 @@ function Authentication(props) {
 
             if (hasAccount) {
                 localStorage.setItem("auth-token", JSON.stringify(data))
+                
+                let user_response = await fetch(BASE_URL + "/auth/users/me/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${data.access}`
+                    }
+                })
+                let user_data = await user_response.json()
+                state.dispatch({ type: "SET_CURRENT_USER", payload: user_data })
+                console.log(user_data)
+                console.log(state.currentUser)
+                
                 alert("Logged in successfully")
                 closeModal();
             } else {

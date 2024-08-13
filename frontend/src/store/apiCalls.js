@@ -1,4 +1,4 @@
-import { BASE_URL } from "."
+import { BASE_URL, initialState } from "."
 
 function refreshToken() {
     const TOKEN = localStorage.getItem("auth-token") || "{}"
@@ -22,7 +22,7 @@ function refreshToken() {
 }
 
 
-function logoutToken() {
+function logoutFunction() {
     const TOKEN = localStorage.getItem("auth-token") || "{}"
 
     fetch(BASE_URL + "/auth/logout/", {
@@ -36,6 +36,7 @@ function logoutToken() {
         .then(response => response.json())
         .then(data => {
             localStorage.removeItem("auth-token")
+            initialState.currentUser = {}
         })
         .catch(error => {
             console.error("--- Error when logging out ---")
@@ -46,5 +47,5 @@ function logoutToken() {
 
 export {
     refreshToken,
-    logoutToken
+    logoutFunction
 }
