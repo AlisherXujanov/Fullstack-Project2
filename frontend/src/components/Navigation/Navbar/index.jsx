@@ -33,8 +33,10 @@ function Navbar() {
                 </div>
 
                 <div className="orders-wrapper nav-box">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width='25' height='25' className="RedHeaderNavigationItem_RedHeaderNavigationItem__icon__lqhjb"><path d="M3.998 5.5 2 7.5v7h7V7.293L10.791 5.5H3.998Zm9.795-3H7l-2.002 2h6.793l2.002-2ZM10 7.707V14.5h6.793L19 12.287V5.5h-6.795L10 7.707ZM15.207 2.5l-2.002 2h6.801v6.787L22 9.293V2.5h-6.793ZM2 22.5h7v-7H2v7Zm18.006-3.006L22 17.5v-6.793l-1.994 1.994v6.793ZM10 15.5v7h7l2-2.006v-6.793L17.207 15.5H10Z" fill="white" data-spm-anchor-id="a2g2w.home.orders.i0.75df5586jikm3E"></path></svg>
-                    Orders
+                    <Link to='/orders'>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width='25' height='25' className="RedHeaderNavigationItem_RedHeaderNavigationItem__icon__lqhjb"><path d="M3.998 5.5 2 7.5v7h7V7.293L10.791 5.5H3.998Zm9.795-3H7l-2.002 2h6.793l2.002-2ZM10 7.707V14.5h6.793L19 12.287V5.5h-6.795L10 7.707ZM15.207 2.5l-2.002 2h6.801v6.787L22 9.293V2.5h-6.793ZM2 22.5h7v-7H2v7Zm18.006-3.006L22 17.5v-6.793l-1.994 1.994v6.793ZM10 15.5v7h7l2-2.006v-6.793L17.207 15.5H10Z" fill="white" data-spm-anchor-id="a2g2w.home.orders.i0.75df5586jikm3E"></path></svg>
+                        Orders
+                    </Link>
                 </div>
 
                 <div className="cart-wrapper nav-box">

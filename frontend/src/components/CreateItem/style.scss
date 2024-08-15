@@ -1,0 +1,101 @@
+@import "../../assets/styles/settings";
+
+.create-item-page-wrapper {
+    max-width: 1374px;
+    margin: 50px auto;
+
+
+    form {
+        width: 80%;
+        margin: 50px auto;
+
+        .form-control {
+            margin-bottom: 20px;
+
+            * {
+                margin: 5px 0;
+            }
+
+            .row {
+                @include grid(10px, 2);
+                grid-template-columns: 2fr 1fr;
+
+                input {
+                    height: 50px;
+                }
+            }
+
+            textarea,
+            input {
+                display: block;
+                width: 100%;
+                padding: 20px;
+                border-radius: 10px;
+                border: 1px solid $color-grey-dark-text;
+                box-shadow: 1px 1px 10px $color-grey-dark-text,
+                    -1px -1px 10px $color-grey-dark-text;
+                outline: none;
+
+                &:hover {
+                    border: 1px solid $color-green-lime;
+                }
+
+                &:focus {
+                    border: 1px solid $color-blue-green;
+
+                    box-shadow: 1px 1px 10px $color-blue-green,
+                        -1px -1px 10px $color-blue-green;
+                }
+            }
+
+            .image-input-wrapper {
+                position: relative;
+                background-color: #f3f3f3;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0;
+                border-radius: 10px;
+                padding: 40px 0 30px 0;
+                height: 18px;
+                box-shadow: 1px 1px 10px $color-grey-dark-text,
+                    -1px -1px 10px $color-grey-dark-text;
+
+                &:hover {
+                    box-shadow: 1px 1px 10px $color-green-lime,
+                        -1px -1px 10px $color-green-lime;
+                }
+
+                input[type=file] {
+                    cursor: pointer;
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    opacity: 0;
+                }
+            }
+
+            button {
+                width: 100%;
+                padding: 20px;
+                border-radius: 10px;
+                border: 2px solid $color-grey-dark-text;
+                font-size: 1.2rem;
+                cursor: pointer;
+                box-shadow: 1px 1px 10px $color-grey-dark-text,
+                    -1px -1px 10px $color-grey-dark-text;
+
+                &:hover {
+                    border: 2px solid $color-blue-green;
+                    background-color: $color-blue-green;
+                    box-shadow: 1px 1px 10px $color-blue-green,
+                        -1px -1px 10px $color-blue-green;
+                    color: snow;
+                }
+            }
+        }
+
+    }
+}

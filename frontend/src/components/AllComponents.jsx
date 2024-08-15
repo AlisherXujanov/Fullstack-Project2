@@ -3,6 +3,9 @@ import Navigation from "./Navigation"
 import NoPage from "./NoPage"
 import LandingPage from "./LandingPage"
 import Authentication from "./Authentication"
+import Orders from './Orders'
+import CreateItem from './CreateItem'
+
 
 function AllComponents(props) {
     const location = useLocation()
@@ -11,6 +14,8 @@ function AllComponents(props) {
             <Route path="/" element={<Navigation />} >
                 <Route index element={<LandingPage />} />
                 <Route path="auth" element={<Authentication />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="create-item" element={<CreateItem />} />
                 <Route path="*" element={<NoPage />} />
             </Route>
         </Routes>

@@ -12,6 +12,11 @@ header {
         @include flex($justify: space-between, $gap: 5px);
         padding: 5px 10px;
 
+        a {
+            text-decoration: none;
+            color: snow;
+        }
+
 
         .logo-wrapper {
             width: 306px;

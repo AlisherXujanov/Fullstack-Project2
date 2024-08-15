@@ -12,3 +12,21 @@ input {
 button {
     cursor: pointer;
 }
+
+.standart-button {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: $color-fills-fill-success;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    text-decoration: none;
+
+    &:hover {
+        background-color: darken($color-fills-fill-success, 10%);
+    }
+}
