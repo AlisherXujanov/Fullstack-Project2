@@ -25,6 +25,27 @@
                 }
             }
 
+            .images-container {
+                img {
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    box-shadow: 1px 1px 10px $color-grey-dark-text,
+                        -1px -1px 10px $color-grey-dark-text;
+                    margin-right: 10px;
+                    position: relative;
+                    transition: 0.2s;
+
+                    &:hover {
+                        box-shadow: 1px 1px 10px $color-borders-error,
+                            -1px -1px 10px $color-borders-error;
+                        cursor: pointer;
+                        filter: brightness(0.8);
+                    }
+                }
+            }
+
             textarea,
             input {
                 display: block;
