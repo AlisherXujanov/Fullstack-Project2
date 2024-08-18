@@ -4,10 +4,14 @@ function Product(props) {
             <img src={props.image} alt={props.image} width={"100%"} height="192" />
             <div className="price">
                 <span className='discount'>
-                    <del className='actual-price'>169.000</del>
+                    <del className='actual-price'>
+                        {props.price ? props.price : "169.000"}
+                    </del>
                     -<span>50</span>%
                 </span>
-                <p>84.999</p>
+                <p>
+                    {props.price ? props.price/2 : "84.999"}
+                </p>
             </div>
             <div className="row">
                 <div className="stars">
@@ -18,8 +22,12 @@ function Product(props) {
                 </div>
                 <div className="sold-title">6 sold</div>
             </div>
-            <p className='name'>Best Grade AAA</p>
-            <p className='description'>Lorem ipsum dolor sit amet.</p>
+            <p className='name'>
+                {props.name ? props.name : "Best Grade AAA"}
+            </p>
+            <p className='description'>
+                {props.description ? props.description.slice(0, 25) + " ..." : "Lorem ipsum dolor sit amet."}
+            </p>
         </div>
     );
 }
