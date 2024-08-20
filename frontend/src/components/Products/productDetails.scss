@@ -1,0 +1,75 @@
+@import "../../assets//styles/settings";
+
+.product-details {
+    max-width: 1374px;
+    margin: 50px auto;
+
+    h1.name {
+        padding: 20px 40px;
+        background: linear-gradient(90deg, $color-text-sales-primary, $color-ad-entrance);
+        color: $color-is-grey;
+        border-radius: 10px;
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    h4.price {
+        display: inline-block;
+        padding: 20px 40px;
+        background: linear-gradient(90deg, $color-ad-entrance, $color-grey-text);
+        color: $color-is-grey;
+        border-radius: 10px;
+        margin: 20px 0;
+
+        del {
+            text-decoration: line-through solid 2px $color-white;
+            font-size: 1.2em;
+        }
+
+        span {
+            font-size: 1.2em;
+        }
+
+        u {
+            margin-left: 10px;
+            background-color: $color-yellow-light;
+            border-radius: 10px;
+            padding: 5px;
+            color: black;
+            text-decoration: none;
+        }
+    }
+
+    .row {
+        margin: 50px 0;
+        @include grid(20px, 2, 1, 1fr, flex-start, flex-start);
+
+        img {
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        p {
+            font-size: 1.2rem;
+
+            button {
+                padding: 20px 40px;
+                display: inline;
+                border-radius: 0 20px;
+                float: right;
+                margin: 50px 0 50px 50px;
+                color: $color-controls-bg-cta-hover;
+                background-color: $color-dark-text;
+                font-size: 1em;
+                font-weight: bold;
+
+                svg {
+                    margin-right: 20px;
+                    transform: scale(1.5);
+                }
+            }
+        }
+    }
+
+}

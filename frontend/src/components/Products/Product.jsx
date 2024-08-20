@@ -1,16 +1,31 @@
+import { convertToUZS, getExchangeRates } from "../../helpers"
+import { useEffect, useState } from "react";
+
 function Product(props) {
+    const [exchangeRates, setExchangeRates] = useState({})
+    useEffect(() => {
+        async function fetchExchangeRates() {
+            let response = await getExchangeRates()
+            setExchangeRates(response)
+        }
+        fetchExchangeRates()
+    }, [])
+
+
     return (
         <div className="product">
             <img src={props.image} alt={props.image} width={"100%"} height="192" />
             <div className="price">
                 <span className='discount'>
                     <del className='actual-price'>
-                        {props.price ? props.price : "169.000"}
+                        {!isNaN(parseInt(convertToUZS(exchangeRates, props.price ? props.price : 169))) ?
+                            convertToUZS(exchangeRates, props.price ? props.price : 169) + "UZS" : "🔃"}
                     </del>
                     -<span>50</span>%
                 </span>
                 <p>
-                    {props.price ? props.price/2 : "84.999"}
+                    {!isNaN(parseInt(convertToUZS(exchangeRates, props.price ? props.price / 2 : 84))) ?
+                        convertToUZS(exchangeRates, props.price ? props.price / 2 : 84) + "UZS" : "🔃"}
                 </p>
             </div>
             <div className="row">

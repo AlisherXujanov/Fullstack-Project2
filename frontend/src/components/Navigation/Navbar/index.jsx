@@ -23,8 +23,10 @@ function Navbar() {
                 </div>
 
                 <div className="catalog-wrapper nav-box">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width='25' height='25' className="RedHeaderNavigationItem_RedHeaderNavigationItem__icon__lqhjb"><path d="M21.739 3.352v15.065h-6.027a3.013 3.013 0 0 1-3.013-3.013V6.365a3.013 3.013 0 0 1 3.014-3.013h6.026Zm-13.057 0H2.656v15.065h6.026a3.013 3.013 0 0 0 3.013-3.013V6.365a3.013 3.013 0 0 0-3.013-3.013Zm.484 15.065a3.014 3.014 0 0 0 6.026 0H9.166Z" fill="white" data-spm-anchor-id="a2g2w.home.category.i0.75df5586jikm3E"></path></svg>
-                    Catalog
+                    <Link to='/'>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width='25' height='25' className="RedHeaderNavigationItem_RedHeaderNavigationItem__icon__lqhjb"><path d="M21.739 3.352v15.065h-6.027a3.013 3.013 0 0 1-3.013-3.013V6.365a3.013 3.013 0 0 1 3.014-3.013h6.026Zm-13.057 0H2.656v15.065h6.026a3.013 3.013 0 0 0 3.013-3.013V6.365a3.013 3.013 0 0 0-3.013-3.013Zm.484 15.065a3.014 3.014 0 0 0 6.026 0H9.166Z" fill="white" data-spm-anchor-id="a2g2w.home.category.i0.75df5586jikm3E"></path></svg>
+                        Catalog
+                    </Link>
                 </div>
 
                 <div className="searchbar-wrapper">

@@ -5,6 +5,7 @@ import LandingPage from "./LandingPage"
 import Authentication from "./Authentication"
 import Orders from './Orders'
 import CreateItem from './CreateItem'
+import ProductDetails from './Products/ProductDetails.jsx'
 
 
 function AllComponents(props) {
@@ -16,6 +17,7 @@ function AllComponents(props) {
                 <Route path="auth" element={<Authentication />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="create-item" element={<CreateItem />} />
+                <Route path="product/:id" element={<ProductDetails />} />
                 <Route path="*" element={<NoPage />} />
             </Route>
         </Routes>
