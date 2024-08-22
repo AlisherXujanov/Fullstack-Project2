@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Profile
 
 
-class ProductsSerializer(serializers.HyperlinkedModelSerializer):
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ['url', 'image', 'bio']
