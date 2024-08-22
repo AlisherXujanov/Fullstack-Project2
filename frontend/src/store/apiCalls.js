@@ -1,14 +1,17 @@
 import { BASE_URL, initialState } from "."
+import { getTokensFromLocalStorage } from "../helpers"
+
+
 
 function refreshToken() {
-    const TOKEN = localStorage.getItem("auth-token") || "{}"
+    const { _, refreshToken } = getTokensFromLocalStorage()
 
     fetch(BASE_URL + "/api/token/refresh/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ refresh: JSON.parse(TOKEN).refresh })
+        body: JSON.stringify({ refresh: refreshToken })
     })
         .then(response => response.json())
         .then(data => {
@@ -23,9 +26,7 @@ function refreshToken() {
 
 
 async function fetchLogout() {
-    const TOKEN = localStorage.getItem("auth-token") || "{}"
-    const accessToken = JSON.parse(TOKEN).access
-    const refreshToken = JSON.parse(TOKEN).refresh
+    const { accessToken, refreshToken } = getTokensFromLocalStorage()
 
     const response = await fetch(BASE_URL + "/auth/logout/", {
         method: "POST",
@@ -45,7 +46,29 @@ async function fetchLogout() {
     }
 }
 
+
+async function getMe() {
+    const { accessToken, _ } = getTokensFromLocalStorage()
+
+    try {
+        let user_response = await fetch(BASE_URL + "/auth/users/me/", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${accessToken}`
+            }
+        })
+        return await user_response.json()
+    } catch (error) {
+        console.error("--- Error when getting myself ---")
+        console.error(error)
+        console.error("-----------------------------------")
+    }
+}
+
+
 export {
     refreshToken,
-    fetchLogout
+    fetchLogout,
+    getMe
 }

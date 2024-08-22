@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc"
 import { SlSocialVkontakte } from "react-icons/sl"
 import { SiOdnoklassniki } from "react-icons/si"
 import { MdAlternateEmail } from "react-icons/md"
-import { BASE_URL, context } from "../../store"
+import { BASE_URL, context, getMe } from "../../store"
 import "./style.scss"
 
 
@@ -57,19 +57,10 @@ function Authentication(props) {
 
             if (hasAccount) {
                 localStorage.setItem("auth-token", JSON.stringify(data))
-                
-                let user_response = await fetch(BASE_URL + "/auth/users/me/", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${data.access}`
-                    }
-                })
-                let user_data = await user_response.json()
+                let user_data = await getMe()
                 state.dispatch({ type: "SET_CURRENT_USER", payload: user_data })
+
                 console.log(user_data)
-                console.log(state.currentUser)
-                
                 toast.success("Logged in successfully", { theme: "dark" })
                 closeModal();
             } else {

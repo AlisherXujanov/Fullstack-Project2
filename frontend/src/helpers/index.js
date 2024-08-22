@@ -31,4 +31,13 @@ function convertToUZS(exchangeRates, price) {
     return formatted_sum.split("").reverse().join("")
 }
 
-export { convertToUZS, getExchangeRates }
+
+function getTokensFromLocalStorage() {
+    const TOKEN = localStorage.getItem("auth-token") || "{}"
+    const accessToken = JSON.parse(TOKEN).access
+    const refreshToken = JSON.parse(TOKEN).refresh
+    return { accessToken, refreshToken }
+}
+
+
+export { convertToUZS, getExchangeRates, getTokensFromLocalStorage }
