@@ -47,10 +47,10 @@ function Navbar() {
                 </div>
 
                 {
-                    state.currentUser?.username ?
+                    state.currentUser?.user ?
                         <div className="dropdown">
                             <button className="dropbtn nav-box">
-                                <h3>{state.currentUser.username}</h3>
+                                <img src={state.currentUser.image}  />
 
                                 <div className="drp-content">
                                     <Link to='#'>Profile</Link>

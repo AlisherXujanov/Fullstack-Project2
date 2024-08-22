@@ -51,7 +51,7 @@ async function getMe() {
     const { accessToken, _ } = getTokensFromLocalStorage()
 
     try {
-        let user_response = await fetch(BASE_URL + "/auth/users/me/", {
+        let user_response = await fetch(BASE_URL + "/api/current_user_profile/", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
