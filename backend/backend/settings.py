@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'djoser',
     
     'main',
+    'users',
     'django_cleanup.apps.CleanupConfig',
 ]
 
