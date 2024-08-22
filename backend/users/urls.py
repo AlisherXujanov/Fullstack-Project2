@@ -1,12 +1,6 @@
-from django.urls import path, include
+from django.urls import path
 from .api_views import *
 
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register(r'profiles', ProfileApiView)
-
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('current_user_profile/', CurrentUserProfileApiView.as_view()),
 ]
