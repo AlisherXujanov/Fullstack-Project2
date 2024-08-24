@@ -19,7 +19,6 @@ function Products(props) {
             let response = await axios.get(URL)
             if (response.status === 200) {
                 setProducts(response.data)
-                console.log(response.data)
             } else {
                 console.log("Failed to fetch products")
             }
