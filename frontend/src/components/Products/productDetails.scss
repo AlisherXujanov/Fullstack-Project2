@@ -14,30 +14,59 @@
         text-align: center;
     }
 
-    h4.price {
-        display: inline-block;
-        padding: 20px 40px;
-        background: linear-gradient(90deg, $color-ad-entrance, $color-grey-text);
-        color: $color-is-grey;
-        border-radius: 10px;
-        margin: 20px 0;
+    .row {
+        @include grid($columns: 2, $size: 1fr);
 
-        del {
-            text-decoration: line-through solid 2px $color-white;
-            font-size: 1.2em;
-        }
-
-        span {
-            font-size: 1.2em;
-        }
-
-        u {
-            margin-left: 10px;
-            background-color: $color-yellow-light;
+        h4.price {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(90deg, $color-ad-entrance, $color-grey-text);
+            color: $color-is-grey;
             border-radius: 10px;
-            padding: 5px;
-            color: black;
-            text-decoration: none;
+            margin: 20px 0;
+
+            del {
+                text-decoration: line-through solid 2px $color-white;
+                font-size: 1.2em;
+            }
+
+            span {
+                font-size: 1.2em;
+            }
+
+            u {
+                margin-left: 10px;
+                background-color: $color-yellow-light;
+                border-radius: 10px;
+                padding: 5px;
+                color: black;
+                text-decoration: none;
+            }
+        }
+
+        .right {
+            text-align: right;
+            padding-top: 30px;
+
+            a.update {
+                text-decoration: none;
+                background-color: $color-grey-dark-text;
+                text-align: center;
+                width: 120px;
+                padding: 20px 40px;
+                display: inline-block;
+                border-radius: 10px;
+                color: $color-black;
+
+                svg {
+                    transform: scale(2);
+                    margin-bottom: 10px;
+                }
+
+                &:hover {
+                    background-color: $color-controls-bg-cta-hover;
+                }
+            }
         }
     }
 

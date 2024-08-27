@@ -17,6 +17,7 @@ function AllComponents(props) {
                 <Route path="auth" element={<Authentication />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="create-item" element={<CreateItem />} />
+                <Route path="update-item/:id" element={<CreateItem />} />
                 <Route path="product/:id" element={<ProductDetails />} />
                 <Route path="*" element={<NoPage />} />
             </Route>

@@ -172,3 +172,5 @@ DJOSER = {
     "USER_CREATE_PASSWORD_RETYPE": True, # We can use this to make user retype the password
     'LOGOUT_ON_PASSWORD_CHANGE': True,
 }
+
+APPEND_SLASH=False

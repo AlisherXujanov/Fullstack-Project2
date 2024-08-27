@@ -2,6 +2,7 @@ import { refreshToken, fetchLogout, getMe } from "./apiCalls"
 
 import { createContext } from "react";
 const BASE_URL = "http://127.0.0.1:8000"
+const USD_UZS_RATE = 12650
 
 
 const context = createContext()
@@ -27,5 +28,6 @@ export {
     initialState,
     globalReducer,
     BASE_URL,
+    USD_UZS_RATE,
     refreshToken, fetchLogout, getMe
 };

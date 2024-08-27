@@ -1,4 +1,5 @@
-import axios from 'axios'
+import { USD_UZS_RATE } from "../store"
+
 
 async function getExchangeRates() {
     let conversion_rates = {}
@@ -33,9 +34,13 @@ async function getExchangeRates() {
 
 
 
-function convertToUZS(exchangeRates, price) {
-    let uzs = parseInt(exchangeRates.UZS * price)
-
+function convertToUZS(price, exchangeRates=null) {
+    let uzs = 0
+    if (exchangeRates) {
+        uzs = parseInt(exchangeRates.UZS * price)
+    } else {
+        uzs = parseInt(USD_UZS_RATE * price)
+    }
     // 7822785    -->>   7 822 785
     let formatted_sum = ''
     String(uzs).split("").reverse().forEach((char, index) => {

@@ -9,6 +9,8 @@ class Products(models.Model):
     price = models.FloatField()
     image = models.ImageField(upload_to='products/',
                               default='products/default.jpg')
+    owner = models.ForeignKey('auth.User', default=1, related_name='products',
+                              on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
