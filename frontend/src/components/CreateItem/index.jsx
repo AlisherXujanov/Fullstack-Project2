@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react'
 import AddImagePng from "../../assets/icons/addImage.png"
 import { BASE_URL } from "../../store"
 import axios from "axios"
-import { useParams, redirect } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
 
 function CreateItem(props) {
     const { id } = useParams()
+    const navigate = useNavigate();
+
     const [form, setForm] = useState({
         name: "",
         description: "",
@@ -74,7 +76,7 @@ function CreateItem(props) {
                 toast.success("Product updated successfully", { theme: "dark" })
 
                 // redirect to homepage "/"
-                redirect("/")
+                navigate('/')
             } else {
                 response = await axios.post(URL, formData)
             }
