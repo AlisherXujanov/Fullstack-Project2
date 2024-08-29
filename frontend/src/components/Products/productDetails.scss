@@ -48,15 +48,16 @@
             text-align: right;
             padding-top: 30px;
 
-            a.update {
+            a.update,
+            a.delete {
+                float: right;
                 text-decoration: none;
-                background-color: $color-grey-dark-text;
                 text-align: center;
-                width: 120px;
                 padding: 20px 40px;
-                display: inline-block;
                 border-radius: 10px;
-                color: $color-black;
+                color: $color-blue-green;
+                @include flex(column, center, center);
+                width: 50px;
 
                 svg {
                     transform: scale(2);
@@ -64,9 +65,15 @@
                 }
 
                 &:hover {
-                    background-color: $color-controls-bg-cta-hover;
+                    background-color: $color-borders-disabled;
+                    box-shadow: 0 8px 16px lightgray;
                 }
             }
+
+            a.delete {
+                color: $color-red;
+            }
+
         }
     }
 

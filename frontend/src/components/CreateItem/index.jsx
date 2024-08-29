@@ -26,7 +26,7 @@ function CreateItem(props) {
 
 
     async function setProductForm() {
-        let response = await axios.get(BASE_URL + "/api/products/" + parseInt(id))
+        let response = await axios.get(BASE_URL + "/api/products/" + parseInt(id) + "/")
         let data = await response.data
 
 
