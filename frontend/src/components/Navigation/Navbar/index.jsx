@@ -42,8 +42,10 @@ function Navbar() {
                 </div>
 
                 <div className="cart-wrapper nav-box">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width='25' height='25' className="RedHeaderNavigationItem_RedHeaderNavigationItem__icon__lqhjb"><path d="m8.785 14.947-.882-.164 2.658-10.032h12.81l-2.666 9.95-.867-.233-11.053.479Z" fill="currentColor"></path><path d="M18.448 16.828H7.658a2.244 2.244 0 0 1-2.166-2.826L8.51 2.785a2.242 2.242 0 1 1 4.332 1.165l-2.26 8.391h7.865a2.243 2.243 0 1 1 0 4.487Z" fill="currentColor"></path><path d="M2.292 10.056a2.245 2.245 0 0 1-.542-4.11L9.536 1.41a2.243 2.243 0 1 1 2.243 3.885L3.993 9.832a2.24 2.24 0 0 1-1.7.224ZM8.523 23.109a2.692 2.692 0 1 0 0-5.383 2.692 2.692 0 0 0 0 5.383ZM15.25 23.109a2.692 2.692 0 1 0 0-5.384 2.692 2.692 0 0 0 0 5.384Z" fill="white"></path></svg>
-                    Cart
+                    <Link to='/cart'>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width='25' height='25' className="RedHeaderNavigationItem_RedHeaderNavigationItem__icon__lqhjb"><path d="m8.785 14.947-.882-.164 2.658-10.032h12.81l-2.666 9.95-.867-.233-11.053.479Z" fill="currentColor"></path><path d="M18.448 16.828H7.658a2.244 2.244 0 0 1-2.166-2.826L8.51 2.785a2.242 2.242 0 1 1 4.332 1.165l-2.26 8.391h7.865a2.243 2.243 0 1 1 0 4.487Z" fill="currentColor"></path><path d="M2.292 10.056a2.245 2.245 0 0 1-.542-4.11L9.536 1.41a2.243 2.243 0 1 1 2.243 3.885L3.993 9.832a2.24 2.24 0 0 1-1.7.224ZM8.523 23.109a2.692 2.692 0 1 0 0-5.383 2.692 2.692 0 0 0 0 5.383ZM15.25 23.109a2.692 2.692 0 1 0 0-5.384 2.692 2.692 0 0 0 0 5.384Z" fill="white"></path></svg>
+                        Cart
+                    </Link>
                 </div>
 
                 {

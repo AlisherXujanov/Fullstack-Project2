@@ -9,10 +9,12 @@ import "./productDetails.scss"
 function ProductDetails(props) {
     const navigate = useNavigate()
     const [product, setProduct] = useState({})
+    const [productCount, setProductCount] = useState(0)
     const { id } = useParams()
 
     useEffect(() => {
         fetchProducts()
+        updateProductFromLS()
     }, [])
 
     async function fetchProducts() {
@@ -38,7 +40,7 @@ function ProductDetails(props) {
                     console.log("Failed to delete product")
                     return
                 }
-                toast.success(`${product.name} deleted successfully!`, {theme: "dark"})
+                toast.success(`${product.name} deleted successfully!`, { theme: "dark" })
                 navigate("/")
             } catch (error) {
                 console.error(error)
@@ -48,6 +50,49 @@ function ProductDetails(props) {
         }
     }
 
+
+    function updateProductFromLS() {
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]")
+        let product = cart.find(p => p.id === parseInt(id))
+        if (product) {
+            setProductCount(product.count)
+        } else {
+            setProductCount(0)
+        }
+    }
+    function removeFromCart() {
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]")
+        let product = cart.find(p => p.id === parseInt(id))
+
+        if (product) {
+            if (product.count > 1) {
+                let updatedProducts = cart.filter(p => p.id !== parseInt(id))
+                let updatedProduct = { ...product, count: product.count - 1 }
+                updatedProducts.push(updatedProduct)
+                localStorage.setItem("cart", JSON.stringify(updatedProducts))
+            } else if (product.count === 1) {
+                let updatedProducts = cart.filter(p => p.id !== parseInt(id))
+                localStorage.setItem("cart", JSON.stringify(updatedProducts))
+            }
+            updateProductFromLS()
+        }
+    }
+    function addToCart() {
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]")
+        let product = cart.find(p => p.id === parseInt(id))
+        if (product) {
+            let updatedProducts = cart.filter(p => p.id !== parseInt(id))
+            let newProduct = { ...product, count: product.count + 1 }
+
+            updatedProducts.push(newProduct)
+            localStorage.setItem("cart", JSON.stringify(updatedProducts))
+        } else {
+            let newProduct = { id: parseInt(id), count: 1 }
+            console.log(newProduct)
+            localStorage.setItem("cart", JSON.stringify([...cart, newProduct]))
+        }
+        updateProductFromLS()
+    }
 
     return (
         <div className="product-details">
@@ -75,6 +120,21 @@ function ProductDetails(props) {
                         </svg>
                         Update
                     </Link>
+                    <a to={"#"} className="add-to-cart">
+                        <svg onClick={productCount ? null : addToCart} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z" />
+                        </svg>
+                        Add
+                        {
+                            productCount ?
+                                <p>
+                                    <span className="decrement" onClick={removeFromCart}>-</span>
+                                    <b>{productCount}</b>
+                                    <span className="increment" onClick={addToCart}>+</span>
+                                </p>
+                                : null
+                        }
+                    </a>
                 </div>
             </div>
 

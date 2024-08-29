@@ -48,20 +48,26 @@
             text-align: right;
             padding-top: 30px;
 
+            ::selection {
+                background-color: transparent;
+            }
+
             a.update,
-            a.delete {
+            a.delete,
+            a.add-to-cart {
                 float: right;
                 text-decoration: none;
                 text-align: center;
                 padding: 20px 40px;
                 border-radius: 10px;
-                color: $color-blue-green;
+                color: $color-blue;
                 @include flex(column, center, center);
                 width: 50px;
 
                 svg {
                     transform: scale(2);
                     margin-bottom: 10px;
+                    cursor: pointer;
                 }
 
                 &:hover {
@@ -72,6 +78,42 @@
 
             a.delete {
                 color: $color-red;
+            }
+
+            a.add-to-cart {
+                padding: 20px 50px;
+                color: $color-light-green-blue;
+                position: relative;
+                z-index: 1;
+
+                p {
+                    @include flex(row, center, center);
+                    position: relative;
+                    z-index: 2;
+
+                    span {
+                        background-color: $color-light-green-blue;
+                        display: inline-block;
+                        color: snow;
+                        width: 25px;
+                        height: 25px;
+                        cursor: pointer;
+                        border-radius: 5px;
+
+
+                        &.decrement {
+                            background-color: $color-borders-brand;
+                        }
+
+                        &:hover {
+                            background-color: $color-orange-medium;
+                        }
+
+                        &:active {
+                            transform: scale(0.9);
+                        }
+                    }
+                }
             }
 
         }
