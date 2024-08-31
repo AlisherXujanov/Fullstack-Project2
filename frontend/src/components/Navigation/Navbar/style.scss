@@ -121,6 +121,7 @@ header {
         .lang,
         .currency {
             float: right;
+            background-color: $color-white;
         }
 
         div {
@@ -130,6 +131,7 @@ header {
             border: 1px solid $color-borders-normal-with-bg;
             border-radius: 5px;
             margin: 0 3px;
+            background-color: $color-white;
             font-size: 0.8em;
             cursor: pointer;
 

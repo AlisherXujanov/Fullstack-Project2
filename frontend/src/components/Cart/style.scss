@@ -5,4 +5,64 @@
 .cart-page-wrapper {
     max-width: 1374px;
     margin: 50px auto;
+
+    .content {
+        @include grid(20, 2, $align: flex-start, $justify: flex-start);
+
+        .orders-list-wrapper {
+            width: 100%;
+            background-color: $color-white;
+            border-radius: 10px;
+
+            .header {
+                padding: 10px;
+                @include flex(row, flex-start, space-between);
+
+                .select-all-wrapper {
+                    width: 40px;
+                    text-align: center;
+                }
+            }
+
+            .all-orders {
+                padding: 10px;
+
+                .product-item {
+                    @include grid(10px, 3, $align: flex-start, $justify: flex-start);
+                    grid-template-columns: 40px 100px 1fr;
+
+                    .input-wrapper {
+                        @include flex(row, center, center);
+                        height: 100%;
+                    }
+
+                    img {
+                        width: 100%;
+                    }
+
+                    .description {
+                        a {
+                            color: darkgray;
+                            font-weight: bold;
+                        }
+
+                        .counter {
+                            float: right;
+                            padding: 15px 10px;
+
+                            button {
+                                width: 30px;
+                                height: 30px;
+                                margin: 0 5px;
+                            }
+                        }
+
+                        .price-wrapper {
+                            margin-top: 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
