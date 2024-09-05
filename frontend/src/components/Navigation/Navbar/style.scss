@@ -67,11 +67,21 @@ header {
             border-radius: 5px;
             font-size: 12px;
             color: $color-text-contrast;
+            position: relative;
 
             svg {
                 margin-bottom: 5px;
             }
 
+            .selected-items-count {
+                color: $color-controls-bg-cta;
+                position: absolute;
+                top: -10px;
+                right: -3px;
+                font-size: 2em;
+                font-weight: bold;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            }
         }
 
 

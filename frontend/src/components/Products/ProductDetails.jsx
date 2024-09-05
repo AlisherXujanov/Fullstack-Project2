@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
-import { BASE_URL } from '../../store'
+import { BASE_URL, context } from '../../store'
 import { convertToUZS } from "../../helpers"
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -11,6 +11,7 @@ function ProductDetails(props) {
     const [product, setProduct] = useState({})
     const [productCount, setProductCount] = useState(0)
     const { id } = useParams()
+    const state = useContext(context)
 
     useEffect(() => {
         fetchProducts()
@@ -59,6 +60,7 @@ function ProductDetails(props) {
         } else {
             setProductCount(0)
         }
+        state.setSelectedItemsCount()
     }
     function removeFromCart() {
         let cart = JSON.parse(localStorage.getItem("cart") || "[]")

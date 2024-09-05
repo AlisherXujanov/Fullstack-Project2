@@ -8,7 +8,8 @@ const USD_UZS_RATE = 12650
 const context = createContext()
 const initialState = {
     currentUser: {},
-    counter: 0,
+    selectedProducts: [],
+    cartProductsCount: 0,
 }
 
 
@@ -18,6 +19,10 @@ function globalReducer(state, action) {
             return { ...state, currentUser: action.payload }
         case "LOGOUT":
             return { ...state, currentUser: {} }
+        case "SET_SELECTED_PRODUCTS":
+            return { ...state, selectedProducts: action.payload }
+        case "SET_SELECTED_ITEMS_COUNT":
+            return { ...state, cartProductsCount: action.payload }
         default:
             throw new Error("Unexpected action")
     }

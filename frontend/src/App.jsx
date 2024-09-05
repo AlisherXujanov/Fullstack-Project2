@@ -19,7 +19,14 @@ function App() {
 
   useEffect(() => {
     fetchCurrentUser()
+    setSelectedItemsCount()
   }, [])
+
+  function setSelectedItemsCount() {
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]")
+    state.dispatch({ type: "SET_SELECTED_ITEMS_COUNT", payload: cart.length })
+  }
+  state.setSelectedItemsCount = setSelectedItemsCount
 
 
   return (

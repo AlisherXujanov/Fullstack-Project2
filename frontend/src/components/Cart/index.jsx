@@ -1,12 +1,12 @@
 import "./style.scss"
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from "react"
-import { BASE_URL } from "../../store"
+import { useEffect, useState, useContext } from "react"
+import { BASE_URL, context} from "../../store"
 import axios from "axios"
 
 function Cart(props) {
     const [products, setProducts] = useState([])
-    const [selectedProducts, setSelectedProducts] = useState([])
+    const state = useContext(context)
 
     useEffect(() => {
         fetchProducts()
@@ -56,6 +56,7 @@ function Cart(props) {
             })
             setProducts(updatedProducts)
         }
+        state.setSelectedItemsCount()
     }
     function removeFromCart(productID) {
         let cart = JSON.parse(localStorage.getItem("cart") || "[]")
@@ -90,20 +91,19 @@ function Cart(props) {
         }
         updateProductFromLS(productID)
     }
-
     function setItemAsSelected(e, productID) {
         let selected = e.target.checked
         if (selected) {
-            setSelectedProducts([...selectedProducts, productID])
+            state.dispatch({ type: "SET_SELECTED_PRODUCTS", payload: [...state.selectedProducts, productID] })
         } else {
-            setSelectedProducts(selectedProducts.filter(p => p !== productID))
+            state.dispatch({ type: "SET_SELECTED_PRODUCTS", payload: state.selectedProducts.filter(p => p !== productID) })
         }
     }
     function setAllSelected(e = null) {
         if (e && e.target.checked) {
-            setSelectedProducts(products.map(p => p.id))
+            state.dispatch({ type: "SET_SELECTED_PRODUCTS", payload: products.map(p => p.id) })
         } else {
-            setSelectedProducts([])
+            state.dispatch({ type: "SET_SELECTED_PRODUCTS", payload: [] })
         }
     }
 
@@ -114,20 +114,20 @@ function Cart(props) {
                 <div className="orders-list-wrapper">
                     <div className="header">
                         <div className="select-all-wrapper">
-                            <div class="checkbox-wrapper-styled">
+                            <div className="checkbox-wrapper-styled">
                                 <input
                                     id="_checkbox-styled"
                                     type="checkbox" name='select-all'
-                                    checked={products.length == selectedProducts.length}
+                                    checked={products.length == state.selectedProducts.length}
                                     onChange={(e) => { setAllSelected(e) }}
                                 />
-                                <label for="_checkbox-styled">
-                                    <div class="tick_mark"></div>
+                                <label htmlFor="_checkbox-styled">
+                                    <div className="tick_mark"></div>
                                 </label>
                             </div>
                         </div>
                         <p>
-                            Selected {selectedProducts.length} out of {products.length} products
+                            Selected {state.selectedProducts.length} out of {products.length} products
                         </p>
                     </div>
                     <hr />
@@ -137,16 +137,16 @@ function Cart(props) {
                                 return (
                                     <div className="product-item" key={index}>
                                         <div className="input-wrapper">
-                                            <div class="checkbox-wrapper-styled">
+                                            <div className="checkbox-wrapper-styled">
                                                 <input
                                                     id={"_checkbox-styled" + index}
                                                     type="checkbox"
                                                     name='select-all'
                                                     onChange={(e) => setItemAsSelected(e, product.id)}
-                                                    checked={selectedProducts.includes(product.id)}
+                                                    checked={state.selectedProducts.includes(product.id)}
                                                 />
-                                                <label for={"_checkbox-styled" + index}>
-                                                    <div class="tick_mark"></div>
+                                                <label htmlFor={"_checkbox-styled" + index}>
+                                                    <div className="tick_mark"></div>
                                                 </label>
                                             </div>
                                         </div>
