@@ -83,9 +83,17 @@
             }
 
             .total-all-price {
-                h3 {
-                    margin-right: 10px;
+                float: right;
+
+                button {
+                    padding: 10px 20px;
+                    background-color: $color-blue-green;
+                    color: $color-white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
                     float: right;
+                    margin: 10px 0;
                 }
             }
         }

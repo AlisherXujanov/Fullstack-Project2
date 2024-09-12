@@ -208,6 +208,7 @@ function Cart(props) {
                                 }, 0)
                             )
                         } UZS</h3>
+                        <button className='checkout-btn'>Checkout</button>
                     </div>
                 </div>
             </div>
