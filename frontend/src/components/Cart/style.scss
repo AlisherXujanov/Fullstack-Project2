@@ -7,7 +7,7 @@
     margin: 50px auto;
 
     .content {
-        @include grid(20, 2, $align: flex-start, $justify: flex-start);
+        @include grid(20px, 2, $align: flex-start, $justify: flex-start);
 
         .orders-list-wrapper {
             width: 100%;
@@ -61,6 +61,31 @@
                             margin-top: 30px;
                         }
                     }
+                }
+            }
+        }
+
+        .checkout-details {
+            padding: 20px;
+            background-color: $color-white;
+            border-radius: 10px;
+
+            .items {
+                margin: 20px 0;
+
+                .info {
+                    .row {
+                        padding: 10px 0;
+                        @include grid(10px, 2, $align: flex-start, $justify: flex-start);
+                        border-bottom: 1px solid $color-borders-active;
+                    }
+                }
+            }
+
+            .total-all-price {
+                h3 {
+                    margin-right: 10px;
+                    float: right;
                 }
             }
         }

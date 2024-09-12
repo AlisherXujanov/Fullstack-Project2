@@ -1,7 +1,8 @@
 import "./style.scss"
 import { Link } from 'react-router-dom'
 import { useEffect, useState, useContext } from "react"
-import { BASE_URL, context} from "../../store"
+import { BASE_URL, context } from "../../store"
+import { convertToUZS } from "../../helpers"
 import axios from "axios"
 
 function Cart(props) {
@@ -28,10 +29,11 @@ function Cart(props) {
             console.error(error)
         }
     }
-    function getProductCountFromLS(productID) {
+    function getProductCountFromLS(productID, object = false) {
         let cart = JSON.parse(localStorage.getItem("cart") || "[]")
         let product = cart.find(p => p.id === productID)
         if (product) {
+            if (object) { return product }
             return product.count
         }
         return 0
@@ -165,7 +167,7 @@ function Cart(props) {
                                                 <button onClick={(e) => { addToCart(product.id) }}>+</button>
                                             </div>
                                             <div className="price-wrapper">
-                                                <h2>13 143 406.51 UZS</h2>
+                                                <h2>{convertToUZS(product.price)}</h2>
                                                 <hr />
                                             </div>
                                         </div>
@@ -173,6 +175,39 @@ function Cart(props) {
                                 )
                             })
                         }
+                    </div>
+                </div>
+
+                <div className="checkout-details">
+                    <h3>Selected {state.selectedProducts.length} items</h3>
+                    <div className="items">
+                        {
+                            products.map((p, index) => {
+                                if (!state.selectedProducts.includes(p.id)) return null
+                                return (
+                                    <div key={index} className="info">
+                                        <div className="row">
+                                            <h4>✅ {p.name} - {getProductCountFromLS(p.id)} pics</h4>
+                                            <div className="item-total-price">
+                                                {convertToUZS(p.price * getProductCountFromLS(p.id))} UZS
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    <div className="total-all-price">
+                        <h3>Total: {
+                            convertToUZS(
+                                products.reduce((acc, p) => {
+                                    if (state.selectedProducts.includes(p.id)) {
+                                        return acc + p.price * getProductCountFromLS(p.id)
+                                    }
+                                    return acc
+                                }, 0)
+                            )
+                        } UZS</h3>
                     </div>
                 </div>
             </div>
