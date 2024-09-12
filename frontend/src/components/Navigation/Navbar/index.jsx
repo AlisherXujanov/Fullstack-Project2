@@ -2,11 +2,23 @@ import './style.scss'
 import { Link } from 'react-router-dom'
 import { context } from '../../../store'
 import { fetchLogout } from '../../../store/apiCalls'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
 
 function Navbar() {
+    const [searchInfo, setSearchInfo] = useState([])
     const state = useContext(context)
+
+    function searchItems(e) {
+        const { value } = e.target
+        if (!value) {
+            setSearchInfo([])
+            return
+        }
+        const foundProducts = state.products.filter(p => p.name.toLowerCase().includes(value.toLowerCase()))
+        setSearchInfo(foundProducts)
+    }
+
 
     function logout() {
         fetchLogout()
@@ -30,8 +42,20 @@ function Navbar() {
                 </div>
 
                 <div className="searchbar-wrapper">
-                    <input type="text" placeholder='Pico 4' />
+                    <input type="text" placeholder='Pico 4' onChange={searchItems} />
                     <button className='find'>Find</button>
+
+                    {searchInfo &&
+                        <div className="content">
+                            {
+                                searchInfo.map(p => {
+                                    return (
+                                        <Link className="search-result-item" to={"/product/" + p.id} key={p.id}>{p.name}</Link>
+                                    )
+                                })
+                            }
+                        </div>
+                    }
                 </div>
 
                 <div className="orders-wrapper nav-box">
@@ -53,7 +77,7 @@ function Navbar() {
                     state.currentUser?.user ?
                         <div className="dropdown">
                             <button className="dropbtn nav-box">
-                                <img src={state.currentUser.image}  />
+                                <img src={state.currentUser.image} />
 
                                 <div className="drp-content">
                                     <Link to='#'>Profile</Link>

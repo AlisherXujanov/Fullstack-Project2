@@ -7,6 +7,7 @@ const USD_UZS_RATE = 12650
 
 const context = createContext()
 const initialState = {
+    products: [],
     currentUser: {},
     selectedProducts: [],
     cartProductsCount: 0,
@@ -17,6 +18,8 @@ function globalReducer(state, action) {
     switch (action.type) {
         case "SET_CURRENT_USER":
             return { ...state, currentUser: action.payload }
+        case "SET_PRODUCTS":
+            return { ...state, products: action.payload }
         case "LOGOUT":
             return { ...state, currentUser: {} }
         case "SET_SELECTED_PRODUCTS":

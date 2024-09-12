@@ -1,13 +1,13 @@
 import "./style.scss"
 import Product from "./Product"
 import ProductImage from '../../assets/images/product.png'
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import axios from 'axios'
-import { BASE_URL } from "../../store"
+import { BASE_URL, context } from "../../store"
 import { Link } from 'react-router-dom'
 
 function Products(props) {
-    const [products, setProducts] = useState([])
+    const state = useContext(context)
 
     useEffect(() => {
         fetchProducts()
@@ -18,7 +18,7 @@ function Products(props) {
         try {
             let response = await axios.get(URL)
             if (response.status === 200) {
-                setProducts(response.data)
+                state.dispatch({ type: "SET_PRODUCTS", payload: response.data })
             } else {
                 console.log("Failed to fetch products")
             }
@@ -36,7 +36,7 @@ function Products(props) {
 
             <div className="content">
                 {
-                    products.map((product, index) => {
+                    state.products.map((product, index) => {
                         return (
                             <Link to={"/product/" + parseInt(product.id)} key={index}>
                                 <Product
