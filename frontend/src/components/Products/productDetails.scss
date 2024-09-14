@@ -123,9 +123,17 @@
         margin: 50px 0;
         @include grid(20px, 2, 1, 1fr, flex-start, flex-start);
 
-        img {
+        .images {
             border-radius: 10px;
             object-fit: cover;
+
+            .slider {
+                li {
+                    img {
+                        height: 350px;
+                    }
+                }
+            }
         }
 
         p {

@@ -5,6 +5,8 @@ import { convertToUZS } from "../../helpers"
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import "./productDetails.scss"
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 function ProductDetails(props) {
     const navigate = useNavigate()
@@ -14,11 +16,11 @@ function ProductDetails(props) {
     const state = useContext(context)
 
     useEffect(() => {
-        fetchProducts()
+        fetchProduct()
         updateProductFromLS()
     }, [])
 
-    async function fetchProducts() {
+    async function fetchProduct() {
         const URL = BASE_URL + "/api/products/" + parseInt(id) + "/"
         try {
             let response = await axios.get(URL)
@@ -141,7 +143,21 @@ function ProductDetails(props) {
             </div>
 
             <div className="row">
-                <img src={product.image} width={"100%"} height={400} />
+
+                <div className="images">
+                    <Carousel infiniteLoop={true} autoPlay={true}>
+                        {
+                            product.images && product.images.map((img, idx) => {
+                                return (
+                                    <div key={idx}>
+                                        <img src={img.image} width={"100%"} />
+                                        {/* <p className="legend">{product.name}</p> */}
+                                    </div>
+                                )
+                            })
+                        }
+                    </Carousel>
+                </div>
 
                 <p className="description">
                     {product.description}
