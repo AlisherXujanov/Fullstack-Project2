@@ -29,24 +29,12 @@ function CreateItem(props) {
         let response = await axios.get(BASE_URL + "/api/products/" + parseInt(id) + "/")
         let data = await response.data
 
-
-        // NOTE: TODO
-        // FIX THIS
-        let imgAsFile = null;
-        if (data.image) {
-            const response = await axios.get(data.image, {
-                responseType: 'blob'
-            });
-            const blob = await response.data;
-            imgAsFile = new File([blob], "image.jpg");
-        }
-
         setForm({
             id: data.id,
             name: data.name,
             description: data.description,
             price: data.price,
-            // images: [[imgAsFile, data.image]]
+            images: []
         })
     }
 
@@ -59,14 +47,14 @@ function CreateItem(props) {
         formData.append("description", form.description)
         formData.append("price", form.price)
         // GET ONLY FIRST image as image for now
-        if (form.images) {
-            formData.append("image", form.images[0][0])
-        }
+        // if (form.images) {
+        //     formData.append("image", form.images[0][0])
+        // }
         // -------------------------
-        // TODO: Add multiple images
-        // form.images.forEach((image, index) => {
-        //     formData.append(`images[${index}]`, image)
-        // })
+        // Add multiple images
+        if (form.images) {
+            formData.append("images", form.images.map(img => img[0]))
+        }
         // -------------------------
         const URL = BASE_URL + "/api/products/"
         try {

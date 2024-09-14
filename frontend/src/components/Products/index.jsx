@@ -40,7 +40,7 @@ function Products(props) {
                         return (
                             <Link to={"/product/" + parseInt(product.id)} key={index}>
                                 <Product
-                                    image={product.images[0].image}
+                                    image={product.images.length ? product.images[0].image : null}
                                     name={product.name}
                                     price={product.price}
                                     description={product.description}
