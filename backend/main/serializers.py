@@ -18,10 +18,14 @@ class ProductsSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'price', 'images', 'url']
 
     def save(self, **kwargs):
-        images = self.context['request'].FILES.getlist('images')
+        images = []
+        for key in self.context['request'].FILES.keys():
+            images.append(self.context['request'].FILES[key])
+            
         product:Products = super().save(**kwargs)
         for image in images:
             ProductImages.objects.create(product=product, image=image)
-            product.images = ProductImages.objects.filter(product=product)
-            product.save()
+
+        product.images.set(ProductImages.objects.filter(product=product))
+        product.save()
         return product

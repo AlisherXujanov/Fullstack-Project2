@@ -53,7 +53,10 @@ function CreateItem(props) {
         // -------------------------
         // Add multiple images
         if (form.images) {
-            formData.append("images", form.images.map(img => img[0]))
+            // formData.append(`image`, )
+            for (let i=0; i<form.images.length; i++) {
+                formData.append(`image-${i}`, form.images[i][0])
+            }
         }
         // -------------------------
         const URL = BASE_URL + "/api/products/"
