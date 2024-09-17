@@ -32,9 +32,7 @@ async function getExchangeRates() {
     return conversion_rates
 }
 
-
-
-function convertToUZS(price, exchangeRates=null) {
+function convertToUZS(price, exchangeRates = null) {
     let uzs = 0
     if (exchangeRates) {
         uzs = parseInt(exchangeRates.UZS * price)

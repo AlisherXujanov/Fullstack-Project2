@@ -8,7 +8,9 @@ function Navigation() {
         <>
             <Navbar />
 
-            <Outlet />
+            <div id="outlet-wrapper">
+                <Outlet />
+            </div>
 
             <Footer />
         </>

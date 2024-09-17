@@ -153,7 +153,7 @@ function Cart(props) {
                                             </div>
                                         </div>
                                         <div className="image">
-                                            <img src={product.image} alt="product" height={100} />
+                                            <img src={product.images.length ? product.images[0].image : null} alt="No image" height={100} />
                                         </div>
                                         <div className="description">
                                             <Link to={"/product/" + product.id}>

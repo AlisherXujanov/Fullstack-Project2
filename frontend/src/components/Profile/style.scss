@@ -1,0 +1,23 @@
+.profile-page-wrapper {
+    max-width: 1374px;
+    margin: 50px auto;
+
+
+    h1 {
+        margin-bottom: 50px;
+    }
+
+    img {
+        float: right;
+        position: relative;
+        top: -50px;
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    p {
+        margin: 10px 0;
+        font-size: 1.2em;
+    }
+}

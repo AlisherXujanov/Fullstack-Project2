@@ -80,7 +80,7 @@ function Navbar() {
                                 <img src={state.currentUser.image} />
 
                                 <div className="drp-content">
-                                    <Link to='#'>Profile</Link>
+                                    <Link to='/profile'>Profile</Link>
                                     <a href='#' onClick={logout}>Logout</a>
                                 </div>
                             </button>
